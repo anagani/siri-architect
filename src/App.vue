@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
-import AuroraBackground from './components/AuroraBackground.vue'
+import LampEffect from './components/LampEffect.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
 import SleekLineCursor from './components/SleekLineCursor.vue'
 import DirectionAwareHover from './components/DirectionAwareHover.vue'
-import SparklesText from './components/SparklesText.vue'
 import BentoGrid from './components/BentoGrid.vue'
 import BentoGridItem from './components/BentoGridItem.vue'
 import GlowBorder from './components/GlowBorder.vue'
+import MorphingTabs from './components/MorphingTabs.vue'
 
 const portfolioRef = ref<HTMLElement | null>(null)
+const aboutRef = ref<HTMLElement | null>(null)
+const contactRef = ref<HTMLElement | null>(null)
 const expandedProject = ref<number | null>(null)
 const bentoRefs = ref<Record<number, HTMLElement | null>>({})
 const expandedImage = ref<{ src: string; title: string } | null>(null)
+const activeTab = ref('Home')
+const navTabs = ['Home', 'Projects', 'About', 'Contact']
 
 const projects = [
   {
@@ -85,6 +89,19 @@ function scrollToPortfolio() {
   portfolioRef.value?.scrollIntoView({ behavior: 'smooth' })
 }
 
+function handleNavClick(tab: string) {
+  activeTab.value = tab
+  if (tab === 'Home') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else if (tab === 'Projects') {
+    portfolioRef.value?.scrollIntoView({ behavior: 'smooth' })
+  } else if (tab === 'About') {
+    aboutRef.value?.scrollIntoView({ behavior: 'smooth' })
+  } else if (tab === 'Contact') {
+    contactRef.value?.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
 function toggleProject(index: number) {
   if (expandedProject.value === index) {
     expandedProject.value = null
@@ -110,24 +127,34 @@ function closeImage() {
 
 <template>
   <SleekLineCursor />
-  <AuroraBackground class="min-h-screen">
-    <div class="z-10 flex flex-col items-center gap-4">
-      <SparklesText 
-        text="Sireesha Ettay" 
-        class="text-4xl md:text-6xl text-center"
-        :sparkles-count="12"
-      />
-      <p class="text-lg text-muted-foreground">
+  
+  <!-- Fixed Navigation -->
+  <nav class="fixed top-6 right-6 z-50">
+    <MorphingTabs 
+      :tabs="navTabs" 
+      :active-tab="activeTab" 
+      :margin="12"
+      :blur-std-deviation="5"
+      @update:active-tab="handleNavClick"
+    />
+  </nav>
+
+  <LampEffect :delay="0.3" :duration="0.8">
+    <div class="flex flex-col items-center gap-6">
+      <h1 class="text-4xl md:text-7xl text-center font-bold bg-gradient-to-b from-cyan-300 via-cyan-400 to-cyan-600 bg-clip-text text-transparent leading-relaxed pb-2">
+        Sireesha Ettay
+      </h1>
+      <p class="text-lg md:text-xl text-cyan-200/80 text-center max-w-md">
         Welcome to my architecture portfolio.
       </p>
       <InteractiveHoverButton text="Explore My Work" @click="scrollToPortfolio" />
     </div>
-  </AuroraBackground>
+  </LampEffect>
 
   <!-- Portfolio Section -->
-  <section ref="portfolioRef" class="min-h-screen bg-zinc-900 py-20 px-8">
+  <section ref="portfolioRef" class="min-h-screen bg-slate-950 py-20 px-8">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-16">
         Featured Projects
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
@@ -213,6 +240,95 @@ function closeImage() {
             </Transition>
           </div>
         </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section ref="aboutRef" class="min-h-screen bg-slate-900 py-20 px-8">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-12">
+        About Me
+      </h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <p class="text-lg text-gray-300 leading-relaxed">
+            I'm Sireesha Ettay, a passionate architect with over a decade of experience 
+            designing spaces that inspire and transform communities.
+          </p>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            My philosophy centers on sustainable design, blending modern aesthetics 
+            with environmental responsibility. Every project is an opportunity to 
+            create something meaningful that stands the test of time.
+          </p>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            From residential villas to cultural centers, I believe architecture 
+            should tell a story and evoke emotion while serving its practical purpose.
+          </p>
+        </div>
+        <div class="bg-slate-800/50 rounded-2xl p-8 border border-cyan-500/20">
+          <h3 class="text-xl font-semibold text-cyan-400 mb-6">Expertise</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3 text-gray-300">
+              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Sustainable Architecture
+            </li>
+            <li class="flex items-center gap-3 text-gray-300">
+              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Residential Design
+            </li>
+            <li class="flex items-center gap-3 text-gray-300">
+              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Commercial Spaces
+            </li>
+            <li class="flex items-center gap-3 text-gray-300">
+              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Urban Planning
+            </li>
+            <li class="flex items-center gap-3 text-gray-300">
+              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Interior Architecture
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section ref="contactRef" class="min-h-screen bg-slate-950 py-20 px-8 flex items-center">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 mb-8">
+        Get In Touch
+      </h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+        Have a project in mind? I'd love to hear about it. Let's create 
+        something extraordinary together.
+      </p>
+      <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+        <a 
+          href="mailto:sireesha@example.com" 
+          class="flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-500/40 rounded-full text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          sireesha@example.com
+        </a>
+        <a 
+          href="tel:+1234567890" 
+          class="flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-500/40 rounded-full text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          +1 (234) 567-890
+        </a>
+      </div>
+      <div class="mt-16 pt-8 border-t border-slate-800">
+        <p class="text-gray-500 text-sm">
+          © 2024 Sireesha Ettay. All rights reserved.
+        </p>
       </div>
     </div>
   </section>

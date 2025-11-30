@@ -22,8 +22,8 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   friction: 0.5,
-  trails: 20,
-  size: 50,
+  trails: 15,
+  size: 40,
   dampening: 0.25,
   tension: 0.98,
 });
@@ -43,44 +43,8 @@ interface NodeType {
   vy: number;
 }
 
-interface WaveOptions {
-  phase?: number;
-  offset?: number;
-  frequency?: number;
-  amplitude?: number;
-}
-
 interface LineOptions {
   spring: number;
-}
-
-class Wave {
-  phase: number = 0;
-  offset: number = 0;
-  frequency: number = 0.001;
-  amplitude: number = 1;
-  private e: number = 0;
-
-  constructor(options: WaveOptions = {}) {
-    this.init(options);
-  }
-
-  init(options: WaveOptions): void {
-    this.phase = options.phase || 0;
-    this.offset = options.offset || 0;
-    this.frequency = options.frequency || 0.001;
-    this.amplitude = options.amplitude || 1;
-  }
-
-  update(): number {
-    this.phase += this.frequency;
-    this.e = this.offset + Math.sin(this.phase) * this.amplitude;
-    return this.e;
-  }
-
-  value(): number {
-    return this.e;
-  }
 }
 
 class Node implements NodeType {
@@ -183,7 +147,6 @@ class Line {
 }
 
 let ctx: CanvasRenderingContext2D & { running?: boolean; frame?: number };
-let f: Wave;
 let pos = { x: 0, y: 0 };
 let lines: Line[] = [];
 
@@ -232,8 +195,8 @@ function render(): void {
     ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.globalCompositeOperation = "lighter";
-    ctx.strokeStyle = `hsla(${Math.round(f.update())},50%,50%,0.2)`;
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = `hsla(185, 90%, 60%, 0.5)`;
+    ctx.lineWidth = 2;
 
     for (let t = 0; t < E.trails; t++) {
       const line = lines[t];
@@ -292,13 +255,6 @@ function initCanvas(): void {
 
   ctx.running = true;
   ctx.frame = 1;
-
-  f = new Wave({
-    phase: Math.random() * 2 * Math.PI,
-    amplitude: 85,
-    frequency: 0.0015,
-    offset: 285,
-  });
 
   document.addEventListener("mousemove", onMouseMove);
   document.body.addEventListener("orientationchange", resizeCanvas);
