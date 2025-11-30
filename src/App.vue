@@ -2,7 +2,7 @@
 import { ref, nextTick } from 'vue'
 import AuroraBackground from './components/AuroraBackground.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
-import FluidCursor from './components/FluidCursor.vue'
+import SleekLineCursor from './components/SleekLineCursor.vue'
 import DirectionAwareHover from './components/DirectionAwareHover.vue'
 import SparklesText from './components/SparklesText.vue'
 import BentoGrid from './components/BentoGrid.vue'
@@ -109,7 +109,7 @@ function closeImage() {
 </script>
 
 <template>
-  <FluidCursor />
+  <SleekLineCursor />
   <AuroraBackground class="min-h-screen">
     <div class="z-10 flex flex-col items-center gap-4">
       <SparklesText 
@@ -230,39 +230,45 @@ function closeImage() {
         
         <!-- Modal Content -->
         <div 
-          class="relative max-w-5xl w-full max-h-[90vh] rounded-2xl overflow-hidden"
+          class="relative max-w-5xl w-full max-h-[90vh] p-1"
           @click.stop
         >
-          <!-- Glow Border Effect -->
-          <GlowBorder 
-            :color="['#8B5CF6', '#EC4899', '#3B82F6']"
-            :border-width="3"
-            :border-radius="16"
-            :duration="3"
-          />
-          
-          <!-- Image Container -->
-          <div class="relative bg-zinc-900 rounded-2xl overflow-hidden">
-            <!-- Close Button -->
-            <button 
-              @click="closeImage"
-              class="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-              </svg>
-            </button>
-            
-            <!-- Image -->
-            <img 
-              :src="expandedImage.src" 
-              :alt="expandedImage.title"
-              class="w-full h-auto max-h-[80vh] object-contain"
+          <!-- Outer glow container -->
+          <div class="relative rounded-2xl overflow-visible">
+            <!-- Glow Border Effect -->
+            <GlowBorder 
+              :color="['#A855F7', '#EC4899', '#3B82F6', '#10B981']"
+              :border-width="4"
+              :border-radius="16"
+              :duration="2"
             />
             
-            <!-- Title Bar -->
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-              <h3 class="text-xl md:text-2xl font-bold text-white">{{ expandedImage.title }}</h3>
+            <!-- Outer glow shadow -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl blur-lg opacity-50 animate-pulse" />
+            
+            <!-- Image Container -->
+            <div class="relative bg-zinc-900 rounded-2xl overflow-hidden">
+              <!-- Close Button -->
+              <button 
+                @click="closeImage"
+                class="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+              </button>
+              
+              <!-- Image -->
+              <img 
+                :src="expandedImage.src" 
+                :alt="expandedImage.title"
+                class="w-full h-auto max-h-[80vh] object-contain"
+              />
+            
+              <!-- Title Bar -->
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <h3 class="text-xl md:text-2xl font-bold text-white">{{ expandedImage.title }}</h3>
+              </div>
             </div>
           </div>
         </div>
