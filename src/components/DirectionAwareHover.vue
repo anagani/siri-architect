@@ -6,6 +6,7 @@
     @mouseleave="handleMouseLeave"
     @touchstart="handleTouchStart"
     @touchend="handleTouchEnd"
+    @click="handleClick"
   >
     <div class="relative size-full overflow-hidden">
       <transition name="fade">
@@ -47,13 +48,19 @@ interface Props {
   childrenClass?: string;
   imageClass?: string;
   class?: string;
+  isExpanded?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   childrenClass: undefined,
   imageClass: undefined,
   class: undefined,
+  isExpanded: false,
 });
+
+const emit = defineEmits<{
+  click: [event: MouseEvent]
+}>();
 
 const divRef = ref<HTMLDivElement | null>(null);
 const direction = ref<"top" | "bottom" | "left" | "right" | null>(null);
@@ -149,6 +156,10 @@ function handleTouchEnd() {
   }, 300);
 }
 
+function handleClick(event: MouseEvent) {
+  emit('click', event);
+}
+
 function getDirection(ev: MouseEvent, obj: HTMLElement) {
   const { width: w, height: h, left, top } = obj.getBoundingClientRect();
   const x = ev.clientX - left - (w / 2) * (w > h ? h / w : 1);
@@ -182,8 +193,8 @@ const imageClass = computed(() =>
     "scale-125", // Mobile
     "sm:scale-135", // Small screens
     "md:scale-150", // Desktop
-    // Grayscale to color effect (desktop only)
-    "md:grayscale md:group-hover/card:grayscale-0",
+    // Grayscale to color effect (desktop only) - disabled when expanded
+    props.isExpanded ? "" : "md:grayscale md:group-hover/card:grayscale-0",
     props.imageClass,
   ),
 );
