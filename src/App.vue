@@ -7,10 +7,12 @@ import DirectionAwareHover from './components/DirectionAwareHover.vue'
 import SparklesText from './components/SparklesText.vue'
 import BentoGrid from './components/BentoGrid.vue'
 import BentoGridItem from './components/BentoGridItem.vue'
+import GlowBorder from './components/GlowBorder.vue'
 
 const portfolioRef = ref<HTMLElement | null>(null)
 const expandedProject = ref<number | null>(null)
 const bentoRefs = ref<Record<number, HTMLElement | null>>({})
+const expandedImage = ref<{ src: string; title: string } | null>(null)
 
 const projects = [
   {
@@ -96,6 +98,14 @@ function toggleProject(index: number) {
     })
   }
 }
+
+function openImage(src: string, title: string) {
+  expandedImage.value = { src, title }
+}
+
+function closeImage() {
+  expandedImage.value = null
+}
 </script>
 
 <template>
@@ -168,13 +178,26 @@ function toggleProject(index: number) {
                       class="bg-zinc-900/80 border-zinc-700/50 hover:border-zinc-600"
                     >
                       <template #header>
-                        <div class="relative h-32 w-full overflow-hidden rounded-lg">
+                        <div 
+                          class="relative h-32 w-full overflow-hidden rounded-lg cursor-pointer"
+                          @click="openImage(feature.image, feature.title)"
+                        >
                           <img 
                             :src="feature.image" 
                             :alt="feature.title"
                             class="h-full w-full object-cover transition-transform duration-300 group-hover/bento:scale-110"
                           />
                           <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent" />
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/bento:opacity-100 transition-opacity">
+                            <div class="bg-black/50 rounded-full p-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8"/>
+                                <path d="M3 16.2V21m0 0h4.8M3 21l6-6"/>
+                                <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6"/>
+                                <path d="M3 7.8V3m0 0h4.8M3 3l6 6"/>
+                              </svg>
+                            </div>
+                          </div>
                         </div>
                       </template>
                       <template #title>
@@ -193,6 +216,59 @@ function toggleProject(index: number) {
       </div>
     </div>
   </section>
+
+  <!-- Image Lightbox Modal with Glow Border -->
+  <Teleport to="body">
+    <Transition name="modal">
+      <div 
+        v-if="expandedImage" 
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+        @click="closeImage"
+      >
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+        
+        <!-- Modal Content -->
+        <div 
+          class="relative max-w-5xl w-full max-h-[90vh] rounded-2xl overflow-hidden"
+          @click.stop
+        >
+          <!-- Glow Border Effect -->
+          <GlowBorder 
+            :color="['#8B5CF6', '#EC4899', '#3B82F6']"
+            :border-width="3"
+            :border-radius="16"
+            :duration="3"
+          />
+          
+          <!-- Image Container -->
+          <div class="relative bg-zinc-900 rounded-2xl overflow-hidden">
+            <!-- Close Button -->
+            <button 
+              @click="closeImage"
+              class="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+              </svg>
+            </button>
+            
+            <!-- Image -->
+            <img 
+              :src="expandedImage.src" 
+              :alt="expandedImage.title"
+              class="w-full h-auto max-h-[80vh] object-contain"
+            />
+            
+            <!-- Title Bar -->
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <h3 class="text-xl md:text-2xl font-bold text-white">{{ expandedImage.title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <style>
@@ -214,5 +290,26 @@ function toggleProject(index: number) {
   opacity: 1;
   max-height: 1000px;
   transform: translateY(0);
+}
+
+/* Modal animations */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .relative,
+.modal-leave-to .relative {
+  transform: scale(0.9);
+}
+
+.modal-enter-to .relative,
+.modal-leave-from .relative {
+  transform: scale(1);
 }
 </style>
