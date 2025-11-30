@@ -177,11 +177,13 @@ const containerClass = computed(() =>
 
 const imageClass = computed(() =>
   cn(
-    "h-full w-full object-cover transition-transform duration-300",
+    "h-full w-full object-cover transition-all duration-300",
     // Responsive scaling
     "scale-125", // Mobile
     "sm:scale-135", // Small screens
     "md:scale-150", // Desktop
+    // Grayscale to color effect
+    "grayscale group-hover/card:grayscale-0",
     props.imageClass,
   ),
 );
