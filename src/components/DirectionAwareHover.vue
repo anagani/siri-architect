@@ -42,12 +42,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "vue";
 
 interface Props {
   imageUrl: string;
   childrenClass?: string;
   imageClass?: string;
-  class?: string;
+  class?: HTMLAttributes["class"];
   isExpanded?: boolean;
 }
 
