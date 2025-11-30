@@ -107,20 +107,27 @@ class Line {
 
   update(): void {
     let e = this.spring;
-    let t = this.nodes[0];
+    const firstNode = this.nodes[0];
+    if (!firstNode) return;
+    
+    let t: NodeType = firstNode;
 
     t.vx += (pos.x - t.x) * e;
     t.vy += (pos.y - t.y) * e;
 
     for (let i = 0, a = this.nodes.length; i < a; i++) {
-      t = this.nodes[i];
+      const currentNode = this.nodes[i];
+      if (!currentNode) continue;
+      t = currentNode;
 
       if (i > 0) {
         const n = this.nodes[i - 1];
-        t.vx += (n.x - t.x) * e;
-        t.vy += (n.y - t.y) * e;
-        t.vx += n.vx * E.dampening;
-        t.vy += n.vy * E.dampening;
+        if (n) {
+          t.vx += (n.x - t.x) * e;
+          t.vy += (n.y - t.y) * e;
+          t.vx += n.vx * E.dampening;
+          t.vy += n.vy * E.dampening;
+        }
       }
 
       t.vx *= this.friction;
@@ -132,24 +139,37 @@ class Line {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    let e: NodeType, t: NodeType;
-    let n = this.nodes[0].x;
-    let i = this.nodes[0].y;
+    if (this.nodes.length < 3) return;
+    
+    const firstNode = this.nodes[0];
+    if (!firstNode) return;
+    
+    let e: NodeType;
+    let t: NodeType;
+    let n = firstNode.x;
+    let i = firstNode.y;
 
     ctx.beginPath();
     ctx.moveTo(n, i);
 
     for (let a = 1, o = this.nodes.length - 2; a < o; a++) {
-      e = this.nodes[a];
-      t = this.nodes[a + 1];
+      const nodeA = this.nodes[a];
+      const nodeB = this.nodes[a + 1];
+      if (!nodeA || !nodeB) continue;
+      e = nodeA;
+      t = nodeB;
       n = 0.5 * (e.x + t.x);
       i = 0.5 * (e.y + t.y);
       ctx.quadraticCurveTo(e.x, e.y, n, i);
     }
 
-    e = this.nodes[this.nodes.length - 2];
-    t = this.nodes[this.nodes.length - 1];
-    ctx.quadraticCurveTo(e.x, e.y, t.x, t.y);
+    const secondLast = this.nodes[this.nodes.length - 2];
+    const last = this.nodes[this.nodes.length - 1];
+    if (secondLast && last) {
+      e = secondLast;
+      t = last;
+      ctx.quadraticCurveTo(e.x, e.y, t.x, t.y);
+    }
     ctx.stroke();
     ctx.closePath();
   }
@@ -178,8 +198,11 @@ function createLines(): void {
 
 function updatePosition(e: MouseEvent | TouchEvent): void {
   if ("touches" in e) {
-    pos.x = e.touches[0].pageX;
-    pos.y = e.touches[0].pageY;
+    const touch = e.touches[0];
+    if (touch) {
+      pos.x = touch.pageX;
+      pos.y = touch.pageY;
+    }
   } else {
     pos.x = e.clientX;
     pos.y = e.clientY;
@@ -189,8 +212,11 @@ function updatePosition(e: MouseEvent | TouchEvent): void {
 
 function handleTouchMove(e: TouchEvent): void {
   if (e.touches.length === 1) {
-    pos.x = e.touches[0].pageX;
-    pos.y = e.touches[0].pageY;
+    const touch = e.touches[0];
+    if (touch) {
+      pos.x = touch.pageX;
+      pos.y = touch.pageY;
+    }
   }
 }
 
@@ -203,9 +229,11 @@ function render(): void {
     ctx.lineWidth = 1;
 
     for (let t = 0; t < E.trails; t++) {
-      const e = lines[t];
-      e.update();
-      e.draw(ctx);
+      const line = lines[t];
+      if (line) {
+        line.update();
+        line.draw(ctx);
+      }
     }
 
     ctx.frame = (ctx.frame || 0) + 1;
