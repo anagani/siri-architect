@@ -1,5 +1,6 @@
 <template>
   <canvas
+    v-if="isDesktop"
     id="canvas"
     ref="canvasRef"
     :class="cn('pointer-events-none fixed inset-0 z-50', props.class)"
@@ -28,6 +29,12 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const isDesktop = ref(true);
+
+function checkIsDesktop(): boolean {
+  if (typeof window === 'undefined') return true;
+  return window.innerWidth >= 768;
+}
 
 interface NodeType {
   x: number;
@@ -271,6 +278,10 @@ function handleBlur(): void {
 }
 
 function initCanvas(): void {
+  // Skip initialization on mobile devices
+  isDesktop.value = checkIsDesktop();
+  if (!isDesktop.value) return;
+
   const canvas = canvasRef.value;
   if (!canvas) return;
 
@@ -290,13 +301,28 @@ function initCanvas(): void {
   });
 
   document.addEventListener("mousemove", onMouseMove);
-  document.addEventListener("touchstart", onMouseMove);
   document.body.addEventListener("orientationchange", resizeCanvas);
-  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("resize", handleResize);
   window.addEventListener("focus", handleFocus);
   window.addEventListener("blur", handleBlur);
 
   resizeCanvas();
+}
+
+function handleResize(): void {
+  // Check if device changed from desktop to mobile (e.g., window resize)
+  const wasDesktop = isDesktop.value;
+  isDesktop.value = checkIsDesktop();
+  
+  if (wasDesktop && !isDesktop.value) {
+    // Switched to mobile, stop the cursor
+    if (ctx) ctx.running = false;
+  } else if (!wasDesktop && isDesktop.value) {
+    // Switched to desktop, reinitialize
+    initCanvas();
+  } else if (isDesktop.value) {
+    resizeCanvas();
+  }
 }
 
 function cleanup(): void {
@@ -306,11 +332,8 @@ function cleanup(): void {
 
   document.removeEventListener("mousemove", onMouseMove);
   document.removeEventListener("mousemove", updatePosition);
-  document.removeEventListener("touchstart", onMouseMove);
-  document.removeEventListener("touchstart", handleTouchMove);
-  document.removeEventListener("touchmove", updatePosition);
   document.body.removeEventListener("orientationchange", resizeCanvas);
-  window.removeEventListener("resize", resizeCanvas);
+  window.removeEventListener("resize", handleResize);
   window.removeEventListener("focus", handleFocus);
   window.removeEventListener("blur", handleBlur);
 }
