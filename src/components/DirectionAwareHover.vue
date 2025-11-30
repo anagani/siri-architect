@@ -182,9 +182,8 @@ const imageClass = computed(() =>
     "scale-125", // Mobile
     "sm:scale-135", // Small screens
     "md:scale-150", // Desktop
-    // Grayscale to color effect (desktop hover + mobile touch)
-    direction.value !== null || isTouched.value ? "grayscale-0" : "grayscale",
-    "group-hover/card:grayscale-0",
+    // Grayscale to color effect (desktop only)
+    "md:grayscale md:group-hover/card:grayscale-0",
     props.imageClass,
   ),
 );
