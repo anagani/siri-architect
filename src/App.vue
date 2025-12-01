@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import LampEffect from './components/LampEffect.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
 import SleekLineCursor from './components/SleekLineCursor.vue'
@@ -12,11 +12,42 @@ import MorphingTabs from './components/MorphingTabs.vue'
 const portfolioRef = ref<HTMLElement | null>(null)
 const aboutRef = ref<HTMLElement | null>(null)
 const contactRef = ref<HTMLElement | null>(null)
+const homeRef = ref<HTMLElement | null>(null)
 const expandedProject = ref<number | null>(null)
 const bentoRefs = ref<Record<number, HTMLElement | null>>({})
 const expandedImage = ref<{ src: string; title: string } | null>(null)
 const activeTab = ref('Home')
 const navTabs = ['Home', 'Projects', 'About', 'Contact']
+
+// Scroll detection for active tab
+function updateActiveTabOnScroll() {
+  const scrollPosition = window.scrollY + window.innerHeight / 3
+  
+  const sections = [
+    { ref: contactRef.value, name: 'Contact' },
+    { ref: aboutRef.value, name: 'About' },
+    { ref: portfolioRef.value, name: 'Projects' },
+    { ref: homeRef.value, name: 'Home' },
+  ]
+  
+  for (const section of sections) {
+    if (section.ref && section.ref.offsetTop <= scrollPosition) {
+      if (activeTab.value !== section.name) {
+        activeTab.value = section.name
+      }
+      break
+    }
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveTabOnScroll, { passive: true })
+  updateActiveTabOnScroll() // Set initial state
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateActiveTabOnScroll)
+})
 
 const projects = [
   {
@@ -139,17 +170,19 @@ function closeImage() {
     />
   </nav>
 
-  <LampEffect :delay="0.3" :duration="0.8">
-    <div class="flex flex-col items-center gap-6">
-      <h1 class="text-4xl md:text-7xl text-center font-bold bg-gradient-to-b from-cyan-300 via-cyan-400 to-cyan-600 bg-clip-text text-transparent leading-relaxed pb-2">
-        Sireesha Ettay
-      </h1>
-      <p class="text-lg md:text-xl text-cyan-200/80 text-center max-w-md">
-        Welcome to my architecture portfolio.
-      </p>
-      <InteractiveHoverButton text="Explore My Work" @click="scrollToPortfolio" />
-    </div>
-  </LampEffect>
+  <div ref="homeRef">
+    <LampEffect :delay="0.3" :duration="0.8">
+      <div class="flex flex-col items-center gap-6">
+        <h1 class="text-4xl md:text-7xl text-center font-bold bg-gradient-to-b from-cyan-300 via-cyan-400 to-cyan-600 bg-clip-text text-transparent leading-relaxed pb-2">
+          Sireesha Ettay
+        </h1>
+        <p class="text-lg md:text-xl text-cyan-200/80 text-center max-w-md">
+          Welcome to my architecture portfolio.
+        </p>
+        <InteractiveHoverButton text="Explore My Work" @click="scrollToPortfolio" />
+      </div>
+    </LampEffect>
+  </div>
 
   <!-- Portfolio Section -->
   <section ref="portfolioRef" class="min-h-screen bg-slate-950 py-20 px-8">

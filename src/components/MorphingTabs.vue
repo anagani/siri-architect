@@ -7,7 +7,12 @@
     <button
       v-for="tab in props.tabs"
       :key="tab"
-      :class="cn('px-4 py-2 bg-cyan-500 text-slate-950 font-medium transition-all duration-500 hover:bg-cyan-400')"
+      :class="cn(
+        'px-4 py-2 font-medium transition-all duration-500',
+        activeTab === tab 
+          ? 'bg-cyan-400 text-slate-950' 
+          : 'bg-slate-700 text-cyan-300 hover:bg-slate-600'
+      )"
       :style="{
         margin: `0 ${activeTab === tab ? props.margin : 0}px`,
       }"
