@@ -10,8 +10,8 @@
       :class="cn(
         'px-4 py-2 font-medium transition-all duration-500',
         activeTab === tab 
-          ? 'bg-cyan-400 text-slate-950' 
-          : 'bg-slate-700 text-cyan-300 hover:bg-slate-600'
+          ? 'bg-white text-slate-950' 
+          : 'bg-[#1a1a1a] text-white hover:bg-[#262626]'
       )"
       :style="{
         margin: `0 ${activeTab === tab ? props.margin : 0}px`,

@@ -41,24 +41,24 @@ const props = withDefaults(defineProps<AuroraBackgroundProps>(), {
   radialGradient: true,
 });
 
-const styles = computed(() => {
-  return {
-    "--aurora":
-      "repeating-linear-gradient(100deg,#1e3a8a_10%,#4338ca_15%,#1e40af_20%,#5b21b6_25%,#1d4ed8_30%)",
-    "--dark-gradient":
-      "repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%)",
-    "--white-gradient":
-      "repeating-linear-gradient(100deg,#fff_0%,#fff_7%,transparent_10%,transparent_12%,#fff_16%)",
+  const styles = computed(() => {
+    return {
+      "--aurora":
+        "repeating-linear-gradient(100deg,#ffffff_10%,#e5e5e5_15%,#d4d4d4_20%,#b3b3b3_25%,#999999_30%)",
+      "--dark-gradient":
+        "repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%)",
+      "--white-gradient":
+        "repeating-linear-gradient(100deg,#fff_0%,#fff_7%,transparent_10%,transparent_12%,#fff_16%)",
 
-    "--blue-300": "#1e40af",
-    "--blue-400": "#1d4ed8",
-    "--blue-500": "#1e3a8a",
-    "--indigo-300": "#4338ca",
-    "--violet-200": "#5b21b6",
-    "--black": "#000",
-    "--white": "#fff",
-    "--transparent": "transparent",
-    "--animate-aurora": "aurora 60s linear infinite",
-  };
-});
+      "--blue-300": "#d4d4d4",
+      "--blue-400": "#b3b3b3",
+      "--blue-500": "#999999",
+      "--indigo-300": "#808080",
+      "--violet-200": "#666666",
+      "--black": "#000",
+      "--white": "#fff",
+      "--transparent": "transparent",
+      "--animate-aurora": "aurora 60s linear infinite",
+    };
+  });
 </script>

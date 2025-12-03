@@ -153,7 +153,7 @@ function closeImage() {
     <Tetris
       class="h-full w-full"
       :base="40"
-      square-color="#22d3ee"
+      square-color="#1a1a1a"
     />
   </div>
   
@@ -179,7 +179,7 @@ function closeImage() {
   <!-- Portfolio Section -->
   <section ref="portfolioRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-16">
         Featured Projects
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
@@ -272,7 +272,7 @@ function closeImage() {
   <!-- About Section -->
   <section ref="aboutRef" class="relative z-10 min-h-screen bg-slate-900/90 py-20 px-8">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-12">
+      <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-12">
         About Me
       </h2>
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -291,27 +291,27 @@ function closeImage() {
             should tell a story and evoke emotion while serving its practical purpose.
           </p>
         </div>
-        <div class="bg-slate-800/50 rounded-2xl p-8 border border-cyan-500/20">
-          <h3 class="text-xl font-semibold text-cyan-400 mb-6">Expertise</h3>
+        <div class="bg-slate-800/50 rounded-2xl p-8 border border-white/20">
+          <h3 class="text-xl font-semibold text-white mb-6">Expertise</h3>
           <ul class="space-y-4">
             <li class="flex items-center gap-3 text-gray-300">
-              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <span class="w-2 h-2 bg-white rounded-full"></span>
               Sustainable Architecture
             </li>
             <li class="flex items-center gap-3 text-gray-300">
-              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <span class="w-2 h-2 bg-white rounded-full"></span>
               Residential Design
             </li>
             <li class="flex items-center gap-3 text-gray-300">
-              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <span class="w-2 h-2 bg-white rounded-full"></span>
               Commercial Spaces
             </li>
             <li class="flex items-center gap-3 text-gray-300">
-              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <span class="w-2 h-2 bg-white rounded-full"></span>
               Urban Planning
             </li>
             <li class="flex items-center gap-3 text-gray-300">
-              <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <span class="w-2 h-2 bg-white rounded-full"></span>
               Interior Architecture
             </li>
           </ul>
@@ -323,7 +323,7 @@ function closeImage() {
   <!-- Contact Section -->
   <section ref="contactRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8 flex items-center">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 mb-8">
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">
         Get In Touch
       </h2>
       <p class="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
@@ -333,7 +333,7 @@ function closeImage() {
       <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
         <a 
           href="mailto:sireesha@example.com" 
-          class="flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-500/40 rounded-full text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all"
+          class="flex items-center gap-3 px-8 py-4 bg-white/10 border border-white/40 rounded-full text-white hover:bg-white/20 hover:border-white/60 transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -342,7 +342,7 @@ function closeImage() {
         </a>
         <a 
           href="tel:+1234567890" 
-          class="flex items-center gap-3 px-8 py-4 bg-cyan-500/10 border border-cyan-500/40 rounded-full text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all"
+          class="flex items-center gap-3 px-8 py-4 bg-white/10 border border-white/40 rounded-full text-white hover:bg-white/20 hover:border-white/60 transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -385,7 +385,7 @@ function closeImage() {
             />
             
             <!-- Outer glow shadow -->
-            <div class="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl blur-lg opacity-50 animate-pulse" />
+            <div class="absolute -inset-1 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-2xl blur-lg opacity-50 animate-pulse" />
             
             <!-- Image Container -->
             <div class="relative bg-zinc-900 rounded-2xl overflow-hidden">
