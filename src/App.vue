@@ -51,66 +51,54 @@ onUnmounted(() => {
 
 const projects = [
   {
-    title: 'Modern Villa',
-    description: 'Contemporary residential design',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2675&auto=format&fit=crop',
+    title: 'Mather Square',
+    description: 'Modern commercial complex with innovative facade design',
+    image: './images/mather%20square/mathers%20square.png',
     details: {
-      location: 'Beverly Hills, CA',
+      location: 'Hyderabad, India',
+      year: '2025',
+      area: '75,000 sq ft',
+      features: [
+        { title: 'Exterior View', description: 'Contemporary architectural facade with dynamic lighting', image: './images/mather%20square/mathers%20square.png' },
+        { title: 'Night Render', description: 'Stunning evening visualization showcasing ambient lighting', image: './images/mather%20square/Enscape_2025-12-01-23-22-07.png' },
+      ]
+    }
+  },
+  {
+    title: 'Modern Residence',
+    description: 'Elegant contemporary home with open living spaces',
+    image: './images/residence-1/rahul_view_1.effectsResult.jpg',
+    details: {
+      location: 'Bangalore, India',
       year: '2024',
-      area: '8,500 sq ft',
+      area: '4,200 sq ft',
       features: [
-        { title: 'Open Floor Plan', description: 'Seamless indoor-outdoor living spaces', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Infinity Pool', description: 'Stunning hillside views', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Smart Home', description: 'Fully automated systems', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Green Roof', description: 'Sustainable garden terrace', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop' },
+        { title: 'Front Elevation', description: 'Modern facade with clean geometric lines', image: './images/residence-1/rahul_view_1.effectsResult.jpg' },
+        { title: 'Garden View', description: 'Seamless indoor-outdoor living connection', image: './images/residence-1/rahul_view_3.effectsResult.jpg' },
+        { title: 'Side Perspective', description: 'Architectural details and material palette', image: './images/residence-1/rahul_view_4.effectsResult.jpg' },
+        { title: 'Entrance', description: 'Welcoming entryway with landscape integration', image: './images/residence-1/rahul_view_5.effectsResult.jpg' },
+        { title: 'Rear View', description: 'Private outdoor spaces and terrace design', image: './images/residence-1/rahul_view_16.effectsResult.jpg' },
+        { title: 'Panoramic View', description: 'Full property perspective showcasing scale', image: './images/residence-1/rahul_view_17.effectsResult.jpg' },
       ]
     }
   },
   {
-    title: 'Urban Office',
-    description: 'Commercial space redesign',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop',
+    title: 'Luxury Villa Interior',
+    description: 'Sophisticated interior design with premium finishes',
+    image: './images/residence-2/LIVING%202B.jpg',
     details: {
-      location: 'Manhattan, NY',
-      year: '2023',
-      area: '45,000 sq ft',
-      features: [
-        { title: 'Collaborative Spaces', description: 'Modern open workspaces', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Sky Lounge', description: 'Rooftop relaxation area', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Glass Facade', description: 'Floor-to-ceiling windows', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop' },
-        { title: 'LEED Certified', description: 'Platinum sustainability rating', image: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=800&auto=format&fit=crop' },
-      ]
-    }
-  },
-  {
-    title: 'Eco House',
-    description: 'Sustainable living concept',
-    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2665&auto=format&fit=crop',
-    details: {
-      location: 'Portland, OR',
+      location: 'Mumbai, India',
       year: '2024',
-      area: '3,200 sq ft',
+      area: '5,500 sq ft',
       features: [
-        { title: 'Solar Panels', description: 'Net-zero energy design', image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Rainwater System', description: 'Sustainable water management', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Natural Materials', description: 'Reclaimed wood & stone', image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Living Walls', description: 'Indoor vertical gardens', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop' },
-      ]
-    }
-  },
-  {
-    title: 'Cultural Center',
-    description: 'Public space architecture',
-    image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?q=80&w=2670&auto=format&fit=crop',
-    details: {
-      location: 'Chicago, IL',
-      year: '2023',
-      area: '120,000 sq ft',
-      features: [
-        { title: 'Grand Atrium', description: 'Six-story central space', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Exhibition Halls', description: 'Flexible gallery spaces', image: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Amphitheater', description: 'Outdoor performance venue', image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=800&auto=format&fit=crop' },
-        { title: 'Sculpture Garden', description: 'Curated outdoor art space', image: 'https://images.unsplash.com/photo-1551913902-c92207136625?q=80&w=800&auto=format&fit=crop' },
+        { title: 'Living Room', description: 'Spacious living area with elegant furnishings', image: './images/residence-2/LIVING%202B.jpg' },
+        { title: 'Master Bedroom', description: 'Luxurious master suite with custom millwork', image: './images/residence-2/BEDROOM%201.jpg' },
+        { title: 'Bedroom Alcove', description: 'Intimate seating area with ambient lighting', image: './images/residence-2/BEDROOM%201B.jpg' },
+        { title: 'Guest Bedroom', description: 'Comfortable guest quarters with modern aesthetics', image: './images/residence-2/BEDROOM%202.jpg' },
+        { title: 'Gourmet Kitchen', description: 'State-of-the-art kitchen with premium appliances', image: './images/residence-2/KITCHEN%201.jpg' },
+        { title: 'Kitchen Island', description: 'Central island with breakfast bar seating', image: './images/residence-2/KITCHEN%202.jpg' },
+        { title: 'Kitchen Details', description: 'Custom cabinetry and stone countertops', image: './images/residence-2/KITCHEN%203.jpg' },
+        { title: 'Foyer', description: 'Grand entrance with statement lighting', image: './images/residence-2/foyr%20c.jpg' },
       ]
     }
   }
