@@ -50,7 +50,7 @@
 import { useElementSize } from "@vueuse/core";
 import { cn } from "@/lib/utils";
 import { getColors } from "theme-colors";
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch, computed } from "vue";
 
 interface Props {
   class?: string;
@@ -68,8 +68,13 @@ const el = ref(null);
 const grid = ref<(boolean | null)[][]>([]);
 const rows = ref(0);
 const cols = ref(0);
+const isMobile = ref(false);
 
 const { width, height } = useElementSize(el);
+
+const effectiveBase = computed(() => {
+  return isMobile.value ? props.base / 4 : props.base;
+});
 
 function createGrid() {
   grid.value = [];
@@ -123,7 +128,10 @@ function removeCell(row: number, col: number) {
 }
 
 function calcGrid() {
-  const cell = width.value / props.base;
+  // Detect mobile (viewport width < 768px)
+  isMobile.value = window.innerWidth < 768;
+  
+  const cell = width.value / effectiveBase.value;
 
   rows.value = Math.floor(height.value / cell);
   cols.value = Math.floor(width.value / cell);
@@ -138,6 +146,9 @@ let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
 onMounted(() => {
   timeoutId = setTimeout(calcGrid, 50);
+  
+  // Recalculate on window resize to handle mobile responsiveness
+  window.addEventListener("resize", calcGrid);
 
   intervalId = setInterval(() => {
     clearColumn();
@@ -149,6 +160,7 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(intervalId);
   clearTimeout(timeoutId);
+  window.removeEventListener("resize", calcGrid);
 });
 </script>
 
