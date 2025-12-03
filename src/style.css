@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Great+Vibes&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -49,6 +50,7 @@
 }
 
 @theme inline {
+  --font-display: 'Brush Script MT', cursive;
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {

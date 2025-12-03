@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
-import LampEffect from './components/LampEffect.vue'
+import Tetris from './components/Tetris.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
 import SleekLineCursor from './components/SleekLineCursor.vue'
 import DirectionAwareHover from './components/DirectionAwareHover.vue'
@@ -8,6 +8,7 @@ import BentoGrid from './components/BentoGrid.vue'
 import BentoGridItem from './components/BentoGridItem.vue'
 import GlowBorder from './components/GlowBorder.vue'
 import MorphingTabs from './components/MorphingTabs.vue'
+import StyledTitle from './components/StyledTitle.vue'
 
 const portfolioRef = ref<HTMLElement | null>(null)
 const aboutRef = ref<HTMLElement | null>(null)
@@ -147,6 +148,15 @@ function closeImage() {
 <template>
   <SleekLineCursor />
   
+  <!-- Fixed Tetris Background for entire page -->
+  <div class="fixed inset-0 z-0">
+    <Tetris
+      class="h-full w-full"
+      :base="40"
+      square-color="#22d3ee"
+    />
+  </div>
+  
   <!-- Fixed Navigation -->
   <nav class="fixed top-6 right-6 z-50">
     <MorphingTabs 
@@ -158,22 +168,16 @@ function closeImage() {
     />
   </nav>
 
-  <div ref="homeRef">
-    <LampEffect :delay="0.3" :duration="0.8">
-      <div class="flex flex-col items-center gap-6">
-        <h1 class="text-4xl md:text-7xl text-center font-bold bg-gradient-to-b from-cyan-300 via-cyan-400 to-cyan-600 bg-clip-text text-transparent leading-relaxed pb-2">
-          Sireesha Ettay
-        </h1>
-        <p class="text-lg md:text-xl text-cyan-200/80 text-center max-w-md">
-          Welcome to my architecture portfolio.
-        </p>
-        <InteractiveHoverButton text="Explore My Work" @click="scrollToPortfolio" />
-      </div>
-    </LampEffect>
+  <!-- Home Section -->
+  <div ref="homeRef" class="relative z-10 min-h-screen flex flex-col items-center justify-center bg-slate-950/80">
+    <div class="flex flex-col items-center gap-6 px-4">
+      <StyledTitle title="Sireesha Ettay" />
+      <InteractiveHoverButton text="Explore my portfolio" @click="scrollToPortfolio" />
+    </div>
   </div>
 
   <!-- Portfolio Section -->
-  <section ref="portfolioRef" class="min-h-screen bg-slate-950 py-20 px-8">
+  <section ref="portfolioRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-16">
         Featured Projects
@@ -266,7 +270,7 @@ function closeImage() {
   </section>
 
   <!-- About Section -->
-  <section ref="aboutRef" class="min-h-screen bg-slate-900 py-20 px-8">
+  <section ref="aboutRef" class="relative z-10 min-h-screen bg-slate-900/90 py-20 px-8">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 text-center mb-12">
         About Me
@@ -317,7 +321,7 @@ function closeImage() {
   </section>
 
   <!-- Contact Section -->
-  <section ref="contactRef" class="min-h-screen bg-slate-950 py-20 px-8 flex items-center">
+  <section ref="contactRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8 flex items-center">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-5xl font-bold text-cyan-300 mb-8">
         Get In Touch
