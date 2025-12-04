@@ -51,19 +51,6 @@
 
 @theme inline {
   --font-display: 'Brush Script MT', cursive;
-  --animate-aurora: aurora 60s linear infinite;
-  @keyframes aurora {
-    from {
-      background-position:
-        50% 50%,
-        50% 50%;
-    }
-    to {
-      background-position:
-        350% 50%,
-        350% 50%;
-    }
-  }
 
   --animate-glow: glow var(--duration) infinite linear;
   @keyframes glow {
