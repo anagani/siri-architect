@@ -9,6 +9,7 @@ import BentoGridItem from './components/BentoGridItem.vue'
 import GlowBorder from './components/GlowBorder.vue'
 import MorphingTabs from './components/MorphingTabs.vue'
 import StyledTitle from './components/StyledTitle.vue'
+import GradientButton from './components/GradientButton.vue'
 
 const portfolioRef = ref<HTMLElement | null>(null)
 const aboutRef = ref<HTMLElement | null>(null)
@@ -330,29 +331,26 @@ function closeImage() {
         Have a project in mind? I'd love to hear about it. Let's create 
         something extraordinary together.
       </p>
-      <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-        <a 
-          href="mailto:sireesha@example.com" 
-          class="flex items-center gap-3 px-8 py-4 bg-white/10 border border-white/40 rounded-full text-white hover:bg-white/20 hover:border-white/60 transition-all"
+      <div class="flex justify-center items-center">
+        <GradientButton
+          :colors="['#ff0080', '#ff8c00', '#40e0d0', '#0080ff', '#ff00ff', '#ff0080']"
+          :duration="3000"
+          :border-radius="24"
+          :border-width="2"
+          :blur="6"
+          bg-color="#ffffff"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-          sireesha@example.com
-        </a>
-        <a 
-          href="tel:+1234567890" 
-          class="flex items-center gap-3 px-8 py-4 bg-white/10 border border-white/40 rounded-full text-white hover:bg-white/20 hover:border-white/60 transition-all"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          +1 (234) 567-890
-        </a>
+          <a href="mailto:sireesha.ettay@gmail.com" class="flex items-center gap-3 text-black no-underline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            sireesha.ettay@gmail.com
+          </a>
+        </GradientButton>
       </div>
       <div class="mt-16 pt-8 border-t border-slate-800">
         <p class="text-gray-500 text-sm">
-          © 2024 Sireesha Ettay. All rights reserved.
+          © 2025 Sireesha Ettay. All rights reserved.
         </p>
       </div>
     </div>

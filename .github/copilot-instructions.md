@@ -21,13 +21,19 @@ npm run dev
 
 Run this as a background process so the server stays running and you can see live updates via HMR (Hot Module Replacement).
 
+**CRITICAL**: Before opening the browser to preview changes, always verify that the dev server is running successfully. You should see output like:
+```
+VITE v7.2.4  ready in XXX ms
+➜  Local:   http://localhost:5173/siri-architect/
+```
+
 ### 2. Make Your Changes
 
 Edit the necessary files. The dev server will automatically hot-reload changes.
 
 ### 3. Preview the Changes
 
-Open the local development URL (typically `http://localhost:5173/siri-architect/`) in the browser to visually confirm the effect is successfully applied.
+**ONLY after confirming the dev server is running**, open the local development URL (`http://localhost:5173/siri-architect/`) in the browser to visually confirm the effect is successfully applied.
 
 ### 4. Build Verification
 
@@ -37,7 +43,13 @@ Once the changes are confirmed working in the dev server, run the build command 
 npm run build
 ```
 
-Only commit and push changes after both steps pass successfully.
+**IMPORTANT**: After `npm run build` completes successfully, immediately run the dev server again:
+
+```bash
+npm run dev
+```
+
+This ensures the dev server is running for the next development cycle.
 
 ## Project Overview
 
