@@ -2,7 +2,7 @@
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import Tetris from './components/Tetris.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
-import ParticleWhirlpoolCursor from './components/ParticleWhirlpoolCursor.vue'
+import SleekLineCursor from './components/SleekLineCursor.vue'
 import DirectionAwareHover from './components/DirectionAwareHover.vue'
 import BentoGrid from './components/BentoGrid.vue'
 import BentoGridItem from './components/BentoGridItem.vue'
@@ -147,7 +147,7 @@ function closeImage() {
 </script>
 
 <template>
-  <ParticleWhirlpoolCursor />
+  <SleekLineCursor />
   
   <!-- Fixed Tetris Background for entire page -->
   <div class="fixed inset-0 z-0">
@@ -271,7 +271,7 @@ function closeImage() {
   </section>
 
   <!-- About Section -->
-  <section ref="aboutRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8">
+  <section ref="aboutRef" class="relative z-10 min-h-screen bg-slate-900/90 py-20 px-8">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-12">
         About Me
