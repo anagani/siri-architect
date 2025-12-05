@@ -167,16 +167,16 @@ function closeImage() {
   </nav>
 
   <!-- Home Section -->
-  <div ref="homeRef" class="relative z-10 min-h-screen flex flex-col items-center justify-center bg-slate-950/80">
-    <div class="flex flex-col items-center gap-6 px-4">
+  <div ref="homeRef" class="relative z-10 min-h-screen flex flex-col items-center justify-center pointer-events-none bg-slate-950/60">
+    <div class="flex flex-col items-center gap-6 px-4 pointer-events-auto">
       <StyledTitle title="Sireesha Ettay" />
       <InteractiveHoverButton text="Explore my portfolio" @click="scrollToPortfolio" />
     </div>
   </div>
 
   <!-- Portfolio Section -->
-  <section ref="portfolioRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8">
-    <div class="max-w-7xl mx-auto">
+  <section ref="portfolioRef" class="relative z-10 min-h-screen py-20 px-8 pointer-events-none bg-slate-950/70">
+    <div class="max-w-7xl mx-auto pointer-events-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-16">
         Featured Projects
       </h2>
@@ -268,8 +268,8 @@ function closeImage() {
   </section>
 
   <!-- About Section -->
-  <section ref="aboutRef" class="relative z-10 min-h-screen bg-slate-900/90 py-20 px-8">
-    <div class="max-w-4xl mx-auto">
+  <section ref="aboutRef" class="relative z-10 min-h-screen py-20 px-8 pointer-events-none bg-slate-900/70">
+    <div class="max-w-4xl mx-auto pointer-events-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-white text-center mb-12">
         About Me
       </h2>
@@ -319,8 +319,8 @@ function closeImage() {
   </section>
 
   <!-- Contact Section -->
-  <section ref="contactRef" class="relative z-10 min-h-screen bg-slate-950/90 py-20 px-8 flex items-center">
-    <div class="max-w-4xl mx-auto text-center">
+  <section ref="contactRef" class="relative z-10 min-h-screen py-20 px-8 flex items-center pointer-events-none bg-slate-950/70">
+    <div class="max-w-4xl mx-auto text-center pointer-events-auto">
       <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">
         Get In Touch
       </h2>
