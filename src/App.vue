@@ -2,7 +2,6 @@
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import Tetris from './components/Tetris.vue'
 import InteractiveHoverButton from './components/InteractiveHoverButton.vue'
-import SleekLineCursor from './components/SleekLineCursor.vue'
 import DirectionAwareHover from './components/DirectionAwareHover.vue'
 import BentoGrid from './components/BentoGrid.vue'
 import BentoGridItem from './components/BentoGridItem.vue'
@@ -146,9 +145,7 @@ function closeImage() {
 }
 </script>
 
-<template>
-  <SleekLineCursor />
-  
+<template>  
   <!-- Fixed Tetris Background for entire page -->
   <div class="fixed inset-0 z-0">
     <Tetris
