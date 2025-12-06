@@ -3,7 +3,7 @@
     ref="buttonRef"
     :class="
       cn(
-        'group relative w-auto cursor-pointer overflow-hidden rounded-full border border-white/40 bg-slate-950/80 p-2 px-6 text-center font-semibold text-white backdrop-blur-sm hover:border-white/60 hover:bg-white/10 transition-colors',
+        'group relative w-auto cursor-pointer overflow-hidden rounded-full border border-white/40 bg-black p-2 px-6 text-center font-semibold text-white backdrop-blur-sm hover:border-white/60 hover:bg-black transition-colors',
         props.class,
       )
     "
