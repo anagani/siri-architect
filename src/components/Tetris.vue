@@ -6,14 +6,14 @@
     <div
       :style="{
         '--cell-size': `${width / cols}px`,
-        '--grid-rows': rows - 1,
+        '--grid-rows': rows,
       }"
       :class="cn('relative w-full', props.class)"
     >
       <div
         ref="el"
         class="absolute inset-0 grid justify-center"
-        :style="{ gridTemplateRows: `repeat(var(--grid-rows), var(--cell-size))` }"
+        :style="{ gridTemplateRows: `repeat(var(--grid-rows), 1fr)` }"
       >
         <div
           v-for="(row, rowIndex) in grid"
