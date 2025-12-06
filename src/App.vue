@@ -373,14 +373,14 @@ function closeImage() {
           <div class="relative rounded-2xl overflow-visible">
             <!-- Glow Border Effect -->
             <GlowBorder 
-              :color="['#A855F7', '#EC4899', '#3B82F6', '#10B981']"
+              :color="['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA']"
               :border-width="4"
               :border-radius="16"
               :duration="2"
             />
             
             <!-- Outer glow shadow -->
-            <div class="absolute -inset-1 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-2xl blur-lg opacity-50 animate-pulse" />
+            <div class="absolute -inset-1 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-2xl blur-lg opacity-30 animate-pulse pointer-events-none" />
             
             <!-- Image Container -->
             <div class="relative bg-zinc-900 rounded-2xl overflow-hidden">
